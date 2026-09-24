@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head><link rel="icon" type="image/svg+xml" href="./Icons/spotivy favicon.svg"><head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+<style>
+:root{--surface:#121212;
+--muted:#b3b3b3;
+--green:#1ed760}
+*{box-sizing:border-box}
+body{margin:0;
+background:#000;
+color:#f7f7f7;
+font-family:"DM Sans",Arial,sans-serif;
+height:100vh;
+overflow:hidden}
+.shell{
+width:100%;
+height:100vh;
+padding-top:2px;
+display:grid;
+grid-template-rows:52px 1fr 79px;
+gap:4px}
+.top{display:flex;
+align-items:center;
+gap:8px;
+padding:0 17.5px}
+.mark{width:32.5px;
+height:32.5px;
+border-radius:50%;
+background:#000000;
+color:#000;
+display:grid;
+place-items:center;
+font-size:20px;
+font-weight:700;
+letter-spacing:-3.5px;
+padding-right:4px}
+.mark .icon{width:32.5px;
+height:32.5px;
+margin:auto;
+filter: invert(1)}
+.home{width:48px;
+height:48px;
+border:0;
+border-radius:50%;
+background:#242424;
+color:#bbb}
+.icon{display:block;
+width:1em;
+height:1em;
+object-fit:contain}
+.icon-light{filter:invert(1);
+opacity:.72}
+.home .icon{width:20px;
+height:20px;
+margin:auto}
+.search{height:48px;
+max-width:475px;
+flex:1;
+border-radius:25px;
+background:#242424;
+display:flex;
+align-items:center;
+padding:0 15px;
+gap:12px;
+color:#bbb;
+font-size:15px}
+.glass{font-size:25px;
+transform:rotate(-20deg)}
+.browse{margin-left:auto;
+border-left:0.5px solid #aaa;
+padding-left:13.5px;
+font-size:19px}
+.space{flex:1}
+.premium{border:0;
+background:#fff;
+color:#080808;
+border-radius:17.5px;
+font-size:12px;
+font-weight:700;
+padding:9.5px 16px;
+white-space:nowrap}
+.install{font-weight:700;
+font-size:11.5px;
+color:#bdbdbd;
+white-space:nowrap;
+display:flex;
+align-items:center;
+gap:5px}
+.install .icon{width:14px;
+height:14px}
+.top-icon{color:#bbb;
+font-size:15.5px}
+.profile{width:48px;
+height:48px;
+border-radius:50%;
+background:#242424;
+display:grid;
+place-items:center}
+.profile b{width:32.5px;
+height:32.5px;
+border-radius:50%;
+background:#c77b51;
+color:#111;
+font-size:14px;
+display:grid;
+place-items:center}
+
+.content{min-height:0;
+display:grid;
+grid-template-columns:69px minmax(330px,1fr) minmax(235px,.55fr);
+gap:8px}
+.rail,.detail,.show-card{border-radius:7.5px;
+background:var(--surface);
+overflow:hidden}
+.rail{display:flex;
+flex-direction:column;
+align-items:center;
+padding:24px 9px;
+gap:15.5px;
+margin-left: 7.5px}
+.library{font-size:21.5px;
+color:#bbb;
+letter-spacing:-5.5px;
+width:21.5px;
+height:21.5px}
+.new{width:34px;
+height:34px;
+border-radius:50%;
+background:#272727;
+border:0;
+padding:9px}
+.new .icon{width:100%;
+height:100%}
+.rail-cover{width:48px;
+height:48px;
+border-radius:2.5px;
+object-fit:cover;
+background:linear-gradient(145deg,#4922ef,#b9f6e5);
+box-shadow:0 1.5px 5px #0006}
+.rail-cover:nth-of-type(4n){background:linear-gradient(135deg,#06795c,#15d55b)}
+
+.detail{background:linear-gradient(180deg,#433334 0,#2a2021 36%,#111 63%);
+overflow:auto}
+.episode-hero{min-height:234px;
+padding:44px 19px 13px}
+.eyebrow{font-size:12.5px;
+margin-bottom:6.5px}
+.episode-hero h1{font-size:27px;
+line-height:1.12;
+letter-spacing:-1.2px;
+margin:0;
+max-width:560px}
+.showline{display:flex;
+align-items:center;
+gap:6.5px;
+margin-top:12.5px;
+font-size:19.5px;
+font-weight:500}
+.showline img{width:25px;
+height:25px;
+border-radius:2px;
+object-fit:cover;
+background:#222}
+.episode-meta{display:flex;
+align-items:center;
+gap:8px;
+color:#b9b5b5;
+font-size:12px;
+margin:19px 0 14px}
+.mini-line{height:3.5px;
+width:85px;
+background:#a9a5a5;
+border-radius:5px}
+.action-row{display:flex;
+align-items:center;
+gap:18.5px}
+.play{width:56px;
+height:56px;
+border-radius:50%;
+border:0;
+background:var(--green);
+font-size:25px;
+padding-left:4.5px}
+.round-action{border:0;
+background:transparent;
+color:#bbb;
+width:27.5px;
+height:27.5px;
+padding:2.5px}
+.round-action .icon{width:100%;
+height:100%}
+.more{padding:3.5px}
+.tabs{height:55px;
+background:#111;
+display:flex;
+gap:26px;
+padding:15px 19px 0}
+.tab{position:relative;
+border:0;
+background:transparent;
+color:#aaa;
+padding:0 0 12px;
+font:700 14.5px "DM Sans"}
+.tab.active{color:#fff}
+.tab.active:after{content:"";
+position:absolute;
+left:50%;
+bottom:0;
+transform:translateX(-50%);
+height:2.5px;
+width:16.5px;
+background:var(--green)}
+.copy{background:#111;
+padding:27px 19px 65px;
+font-size:14.5px;
+line-height:1.48;
+color:#bdb9b9}
+.copy p{max-width:none;
+margin:0 0 34px;    display: flex;
+    flex-direction: column;}
+.more-link{font-weight:700;
+color:#fff}
+.transcript{display:none}
+.time{color:white;
+font-weight:700;
+margin-right:6px}
+
+.show-card{overflow:auto;
+padding:22px 16px 65px}
+.show-card h2{font-size:15px;
+margin:0 0 22.5px}
+.podcast-art{width:100%;
+aspect-ratio:1;
+object-fit:cover;
+border-radius:7px;
+background:#31292b;
+display:block}
+.chapters{margin:15px 0;
+border:1px solid #777;
+border-radius:18px;
+color:#fff;
+background:transparent;
+font:700 12.5px "DM Sans";
+padding:7px 13.5px}
+.current{border-top:0.5px solid #282828;
+padding:16px 0;
+font-size:13px;
+white-space:nowrap;
+overflow:hidden;
+display: flex; align-items: center; gap: 10px;}
+.special {display: flex; flex-direction: column; width: calc(100% - 40px); overflow: hidden;}
+.current strong{font-size:19px;
+display:block}
+.current span{color:#bbb}
+.comment{border-radius:7px;
+background:#242424;
+padding:14px;
+font-size:12.5px;
+font-weight:700;
+margin-top:10px}
+
+.bottom{background:#000;
+display:grid;
+grid-template-columns:minmax(220px,1fr) minmax(360px,500px) minmax(220px,1fr);
+align-items:center;
+padding:4px 16px;
+gap:18px}
+.now-playing{display:flex;
+align-items:center;
+gap:11px;
+min-width:0;
+max-width:420px;
+justify-self:start}
+.now-playing img{width:46px;
+height:46px;
+border-radius:2px;
+object-fit:cover;
+background:#22222200}
+.now-playing strong,.now-playing span{display:block;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis}
+.now-playing strong{font-size:11px}
+.now-playing span{color:#bbb;
+font-size:10px;
+margin-top:2.5px}
+.add{width:17px;
+height:17px}
+.player-center{display:grid;
+justify-items:center;
+gap:5px;
+width:100%}
+.controls{display:flex;
+align-items:center;
+justify-content:center;
+color:#bbb;
+font-size:16px}
+.controls button{border:0;
+background:transparent;
+color:inherit;
+font:inherit;
+display:grid;
+place-items:center;
+width:24px;
+height:24px;
+padding:0}
+.control-group{display:flex;
+align-items:center;
+gap:13px}
+.control-group:first-child{margin-right:17px}
+.control-group:last-child{margin-left:17px}
+.speed-control{display:flex!important;
+align-items:baseline!important;
+justify-content:center;
+gap:1px;
+font-weight:700!important;
+padding-top:4px;}
+.speed-number{font-size:16px;
+line-height:1}
+.speed-symbol{font-size:10px;
+line-height:1}
+.controls .icon{width:14px;
+height:14px;
+margin:auto}
+.controls .play-small{width:32px;
+height:32px;
+border-radius:50%;
+background:#fff;
+color:#000;
+font-size:15px}
+.seek{width:100%;
+display:flex;
+align-items:center;
+gap:7px;
+color:#aaa;
+font-size:9px}
+.seek-track{height:4px;
+background:#5b5b5b;
+flex:1;
+border-radius:3.5px}
+.seek-fill{width:2%;
+height:100%;
+background:#a6a6a6}
+.bottom-right{display:flex;
+justify-content:flex-end;
+align-items:center;
+gap:8px;
+color:#bbb;
+font-size:14px;
+margin-right:0;
+justify-self:end}
+.bottom-right .icon{width:14px;
+height:14px}
+.utility-button{width:16px;
+height:16px;
+border:0;
+background:transparent;
+padding:1px;
+display:grid;
+place-items:center;
+color:#b3b3b3}
+.utility-button:hover{color:#fff}
+.utility-button .icon{width:100%;
+height:100%}
+.volume-control{display:flex;
+align-items:center;
+gap:5px;
+width:82px}
+.volume-range{appearance:none;
+-webkit-appearance:none;
+width:62.5px;
+height:4px;
+margin:0;
+border-radius:4px;
+background:linear-gradient(to right,#fff 0 100%,#5e5e5e 100%)}
+.volume-range::-webkit-slider-thumb{appearance:none;
+-webkit-appearance:none;
+width:7px;
+height:7px;
+border-radius:50%;
+background:#fff}
+.volume-range::-moz-range-thumb{width:7px;
+height:7px;
+border:0;
+border-radius:50%;
+background:#fff}
+.visually-hidden{position:absolute;
+width:1px;
+height:1px;
+padding:0;
+margin:-1px;
+overflow:hidden;
+clip:rect(0,0,0,0);
+white-space:nowrap;
+border:0}
+@media(max-width:800px){.top{padding:0 9px}
+.space,.install,.top-icon{display:none}
+.content{grid-template-columns:52.5px minmax(265px,1fr) 195px}
+.rail-cover{width:35px;
+height:35px}
+.episode-hero h1{font-size:21px}
+.showline{font-size:14.5px}
+.bottom{grid-template-columns:165px minmax(270px,1fr) 120px;
+gap:8px;
+padding:4px 9px}
+.bottom-right{gap:6px}
+.volume{width:32.5px}
+}
+
+#transcript > p:nth-child(1) {
+  color: white;
+}
+#transcript > p:nth-child(1) > span {
+  color: #1ed760;
+}
+
+body > main > footer > div.player-center > div.controls > div:nth-child(1) > button.speed-control {
+  padding-top: 5px;
+}
+
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="top">
+<div class="mark"><img class="icon" src="Icons/spotify.svg" alt="Spotify"></div>
+<button class="home" aria-label="Home"><img class="icon icon-light" src="./Icons/home.svg" alt=""></button>
+<div class="search">
+<span class="glass">⌕</span>
+<span>What do you want to play?</span>
+</div>
+<div class="space">
+</div>
+<button class="premium">Explore Premium</button>
+<span class="install"><img class="icon icon-light" src="./Icons/download.svg" alt=""> Install App</span>
+<div class="profile">
+<b>P</b>
+</div>
+</header>
+<section class="content">
+<aside class="rail">
+<div class="library"><img class="icon icon-light" src="./Icons/library.svg" alt="Your library"></div>
+<button class="new" aria-label="Create"><img class="icon icon-light" src="./Icons/add.svg" alt=""></button>
+<img class="rail-cover" src="./Albums/liked.jpg" alt="Podcast cover">
+<img class="rail-cover" src="./Albums/saved.jpg" alt="Podcast cover">
+<img class="rail-cover" src="./Albums/album1.jpg" alt="Podcast cover">
+<img class="rail-cover" src="./Albums/album2.jpg" alt="Podcast cover">
+<img class="rail-cover" src="./Albums/album3.jpg" alt="Podcast cover">
+</aside>
+<section class="detail">
+<div class="episode-hero">
+<div class="eyebrow">Podcast Episode</div>
+<h1>Special International Women’s Day Episode: Women, Patriarchy and Resistance - Deepa Mehta’s Water & Khaled Hosseini’s A Thousand Splendid Suns </h1>
+<div class="showline">
+<img src="./Albums/podcast-cover.jpg" alt="">
+<span>Service95 Book Club With Dua Lipa</span>
+</div>
+<div class="episode-meta">March 8, 2026 <span>•</span> 13 min 55 sec <span class="mini-line">
+</span>
+</div>
+<div class="action-row">
+<button class="play" id="heroPlay">▶</button>
+<button class="round-action" aria-label="Download"><img class="icon icon-light" src="./Icons/download.svg" alt=""></button>
+<button class="round-action" aria-label="Add to library"><img class="icon icon-light" src="./Icons/add.svg" alt=""></button>
+<button class="round-action more" aria-label="More options"><img class="icon icon-light" src="./Icons/menu.svg" alt=""></button>
+</div>
+</div>
+<div class="tabs">
+<button class="tab active" data-pane="description">Description</button>
+<button class="tab" data-pane="transcript">Transcript</button>
+</div>
+<article class="copy" id="description">
+<p>For this special International Women’s Day episode, Dua Lipa brings together Khaled Hosseini and Deepa Mehta for a comparative literary discussion of 'A Thousand Splendid Suns' and 'Water', exploring how both texts represent gender roles, religious and cultural expectations, female agency, and the strength found through female relationships.</p>
+</article>
+<article class="copy transcript" id="transcript">
+<p>
+<span class="time">Dua</span>Welcome to Service95 Book Club with me, Dua Lipa. Today, I’m thrilled to be joined by Deepa Mehta and Khaled Hosseini. Let’s plunge in! Tell me, Deepa, what inspired you to produce your film Water? And then, Khaled, what inspired you to write your novel A Thousand Splendid Suns?</p>
+<p>
+<span class="time">Deepa</span>The primary spark for Water was an elderly, destitute widow I met in Varanasi, India. She showed me the dilapidated widow’s ashram she lived in: forty women cast out by traditional patriarchal societal expectations. This moved me to reveal how harmful cultural and religious dogmas are weaponised to deny dignity and freedom to margnisalised women. Hence, against the backdrop of 1938 colonial India, amid the swelling momentum of the Indian Independence Movement, I use the symbolism of the Ganga, mise-en-scene, and juxtaposition to illuminate the contradiction between national liberation and women’s continued subjugation. </p>
+<p>
+<span class="time">Khaled</span>It’s interesting that you say that because I was driven to write A Thousand Splendid Suns following similar encounters with Afghan women during my visit to Kabul. Witnessing women begging on the streets, and hearing harrowing firsthand accounts from women who’d survived years of conflict, loss, and Taliban oppression led me to honour their perseverance. Through the characterisation of Mariam and Laila across three turbulent decades of Afghan history, from the late 1950s until the post-9/11 era, alongside imagery and irony, readers worldwide can recognise Afghan women as people with real dreams and heartbreaks, not just as nameless figures in blue burqas.</p>
+<p>
+<span class="time">Dua</span>A strong parallel I noticed between your stories is that both protagonists are introduced as children. Why was this significant? </p>
+<p>
+<span class="time">Deepa</span>In the opening scene, I intend to emphasise that female oppression is not an innate reality, but rather a social construct, drawing upon Simone de Beauvoir's theory that one is not born, but rather becomes a woman. I implement a montage of Chuyia sitting in a cart, where fluid camera movements direct the audience’s attention to her playful and uninhibited personality. The humorous image of the 8-year-old girl playfully rubbing her nearly-deceased husband’s feet with a piece of sugarcane, for example, reflects her cluelessness regarding marriage and widowhood, revealing the stark disconnect between her childlike innocence and the catastrophic adult expectations imposed upon her. I also wanted the physical environment to reflect the limitless possibilities of childhood; wherein expansive wide-angle shots of naturally-lit pondwater contrast sharply with the cold lighting and claustrophobic framing of the widow’s ashram, indicating that widowhood is not an inherent aspect of female identity. I accentuate the abruptness of Chuyia’s transition from freedom and bliss to restriction, positioning the audience to appreciate the profound cruelty of her circumstances.</p>
+<p>
+<span class="time">Khaled</span>Unlike Deepa, who illustrates female oppression as socially constructed, I wanted my readers to recognise that patriarchy burdens girls from birth. I open my novel with Mariam’s mother, Nana, employing dialogue to hurl the insult harami or born from forbidden acts at her daughter. At five years old, Mariam is too young to comprehend the social significance of the word, yet is forced to carry the shame of illegitimacy. When she later repeats harami herself, I exhibit how quickly society’s judgement can become internalised as Mariam believes she is undeserving of love, family, and acceptance. Given that these are fundamental needs children require to develop their sense of identity and security, I readers come to condemn Mariam’s early exposure to patriarchal stigma. Additionally, I foreshadow that this vulnerability sticks with Mariam through the symbolism of Nana’s treasured tea set. When Mariam shatters the dragon depicted on it, I invite readers to mourn the loss of protection and the hardships she will have to endure moving forward. </p>
+<p>
+<span class="time">Dua</span>And I think this brings us to the heart of both your texts: the restrictive gender roles enforced within patriarchal societies. Khaled, how did you explore this?</p>
+<p>
+<span class="time">Khaled</span>After Nana’s death, Mariam’s biological father, Jalil, is obliged to take her in. Given her illegitimate status, however, Jalil and his three wives swiftly arrange her marriage to Rasheed, more than thirty years her senior, essentially erasing the last trace of [Jalil]’s scandalous mistake. The irony of Mariam suffering the consequences of her father’s irresponsibility enables me to expose a gendered double standard. Women are denied agency while men are shielded from accountability, reinforced by the Afghan concepts of nang and namoos, whereby a family’s honour is closely tied to the chastity and conduct of its women – the very notion from which the Taliban’s regressive fundamentalist values arise. Paradoxically, society deems women incapable of protecting that honour themselves, “necessitating” male control. I embody this contradiction through Rasheed’s insistence that Mariam wear the infamous blue burqa to supposedly avoid male gaze. By incorporating suffocating tactile imagery into Mariam’s description of the padded headpiece as feeling tight and heavy on her skull, readers realise that Rasheed’s claim of protection disguises a tangible experience of confinement. With its mesh screen restricting peripheral vision, the burqa literally and metaphorically narrows Mariam’s outlook on the world and excludes her from public life. Therefore, I demonstrate how men warp religious conventions to weaponise patriarchal control. </p>
+<p>
+<span class="time">Deepa</span>Isn’t it striking, just how similarly patriarchal tyranny manifests within different cultures? I too showcase how patriarchal society distorts religious values to uphold restrictive gender roles and justify the ostracisation of widows. The sacred Ganga river, associated with purification and spiritual cleansing, is a motif illuminating this disparity. Employing extreme long shots, I position the tiny figures of the widows against the Ganga’s vast and majestic landscape, highlighting their powerlessness to transform the riverfront into a space where their social exile is visibly enacted. I additionally juxtapose the Hindu ethical ideal of respecting the sanctity of life, with a society that casts moral blame onto women through the public’s treatment of Kalyani, a young widow forced into prostitution to financially support the ashram. I utilise a medium shot of Kalyani accidentally brushing against a woman, who accuses Kalyani of pollut[ing] her, complaining that she must bathe again. Her disdainful dialogue demonstrates the hypocrisy of prioritising religious devotion and ritual purity over dignity, thus urging audiences to criticise such dehumanising rituals.</p>
+<p>
+<span class="time">Dua</span>While you both examine how deeply these prescribed roles constrain women, Khaled, how did you communicate what they cost through Laila?</p>
+<p>
+<span class="time">Khaled</span>I contrast Laila’s upbringing in a flourishing, Soviet-influenced Kabul where women pursued education and careers, with the Taliban’s rigid patriarchal regime, where rules ban girls from attending school, stripping women of basic freedoms. Through her father’s assertion that marriage can wait, education cannot, I reinforce Laila’s expectation of a future beyond domestic duties, intensifying the pain of being denied the future she was raised to envision. When Laila, orphaned and pregnant with her former lover Tariq’s child, marries Rasheed, I characterise her adaptability as she responds to the insecurity of war-torn Kabul. Rasheed’s warning that widows are sleeping on the streets, ready to be abducted or raped, highlight women’s vulnerability without male protection, explaining Laila’s sacrifice of autonomy. I therefore emphasise how prescribed gender roles pressure women to reshape their lives around survival rather than personal aspirations. By diminishing the potential of the strong, independent Laila I portray, I encourage readers to mourn the generations of brilliant women silenced by patriarchal oppression, while compelling them to create a society where girls can actively choose their own destiny. </p>
+<p>
+<span class="time">Dua</span>Deepa, we see a similar cost in Kalyani’s desire to escape widowhood, don’t we?</p>
+<p>
+<span class="time">Deepa</span>Good catch! Kalyani’s desire to marry Narayan, a progressive Brahmin law student and follower of Gandhi introduces the possibility that she might escape this prescriptive society. Yet, when Kalyani discovers that she was exploited by Narayan’s father, hope collapses. Through costuming, I visually reimpose the identity of widowhood she had attempted to escape, with a medium shot of Madhumati subsequently shaving Kalyani’s hair exposing how patriarchal structures painfully reclaim her. When Kalyani returns to the Ganga and drowns herself in its waters, I confront the audience with the tragic reminder of how oppression can deny women even basic, ordinary joys and freedoms. </p>
+<p>
+<span class="time">Dua</span>Khaled, while Kalyani’s fate shows how patriarchal oppression can crush a woman’s spirit, you convey how a beautiful relationship between Mariam and Laila imbues their daily survival with meaning. Tell me about it.</p>
+<p>
+<span class="time">Khaled</span>I gradually evolve their relationship from hostility into mother-daughter love, illustrating Mariam’s initial resentment when Laila arrives as Rasheed’s second wife through his denigrating comparison of Mariam to a Volga and Laila to a Mercedes-Benz. Yet their shared suffering softens the conflict; when Laila defends Mariam, she realises that no one has ever stood up for her before. I also harness the birth of Laila’s daughter, Aziza, as a minor character to further solidify their bond, using Laila’s unwavering love to awaken Mariam’s longing for a child of her own. This newfound family allows me to complete Mariam’s character arc from a woman deprived of belonging to a courageous guardian as she kills Rasheed after he discovers Tariq, and brutally attacks Laila. Through Mariam’s contentment in keeping her loved ones safe and securing their escape despite knowing the Taliban will execute her, I prompt readers to recognise how female solidarity can foster strength and hope. I believe this is something you touch on in your film as well, Deepa. </p>
+<p>
+<span class="time">Deepa</span>Yes, Khaled; I like how you’ve depicted love as a vital lifeline for oppressed women but I take a different approach, presenting love as a critical force that ignites the fight against patriarchal oppression through the maternal bond between Chuyia and Shakuntala, a middle-aged widow. Thoroughly pious, Shakuntala passively complies with the religious traditions governing widowhood; however, her conversation with learned Hindu scholar, Sadanand, begins to unsettle this certainty. Shakuntala recognises the hypocrisy of the traditions she once honoured, realising that widow remarriage is legal, yet deliberately withheld from widows since [men] only care about laws that suit them. I incorporate mise-en-scene of burning pyres in the background during the conversation, symbolising the cremation of her unquestioning faith. My revelation ultimately manifests in Shakuntala’s response to Chuyia’s prostitution; she rejects the ashram’s authority, placing Chuyia on Gandhi’s train to provide her with the possibility of a new life. I intentionally characterise Shakuntala as naive to the hypocrisy of her beliefs so her moral awakening stresses to audiences the necessity of critically examining entrenched social structures, helping younger women to escape the fate of those who came before them.</p>
+<p>
+<span class="time">Dua</span>And how did you promote this message in the film’s resolution, Deepa?</p>
+<p>
+<span class="time">Deepa</span>I purposely leave the film on a positive note. In a wide-angle shot of Shakuntala after having left Chuyia, I capture the train travelling into the distance, symbolising progression and transition. By including a bittersweet, decelerating score capturing the moment’s emotional weight, I leave audiences hopeful, thus affirming the value of challenging traditions that perpetuate injustice.</p>
+<p>
+<span class="time">Dua</span>Women are unbelievably resilient; the strength Shakuntala and Mariam find in the face of their struggles is truly moving. </p>
+<p>
+<span class="time">Khaled</span>Indeed. My novel sees Laila and Tariq returning to Kabul following the Taliban’s removal, where Laila teaches at a local orphanage she rebuilds. I allude to Saib-e-Tabrizi’s Kabul, drawing on his portrayal of the city’s splendour in the bursting radiance of a thousand suns to metaphorise Laila’s ability to transform suffering into purpose and better others’ lives.</p>
+<p>
+<span class="time">Deepa</span>And that, I believe, is the true power of women! [Laughs]</p>
+<p>
+<span class="time">Dua</span>Absolutely! You’ve both certainly done justice to our International Women’s Day special, shedding light on the unfortunate reality of female oppression. Is there anything your audiences should take away?</p>
+<p>
+<span class="time">Deepa</span>I hope audiences understand that recognising oppressive systems is simply not enough; just as flowing Water remains clean through continual movement, society must continually reassess the traditions that govern and perpetuate them. I hope audiences extend the film’s representation of Hindu Indian widows to ongoing human rights issues around the world. </p>
+<p>
+<span class="time">Khaled</span>Similarly, I want readers to develop global empathy. If readers can empathise with Mariam and Laila’s daily struggles and heartbreaks, they may become more compassionate towards civilians affected by conflicts today, whether in Afghanistan, Sudan, Gaza, or Ukraine. Ultimately, I hope this inspires love and generosity as acts of resistance, allowing future generations of girls to survive and heal.</p>
+<p>
+<span class="time">Dua</span>Such powerful reminders! Thanks, Deepa and Khaled, for your time today. And to our listeners, join us next time for more thought-provoking stories and discussions.</p>
+<p>
+</article>
+</section>
+<aside class="show-card">
+<h2>Service95 Book Club With Dua Lipa</h2>
+<img class="podcast-art" src="./Albums/podcast-cover.jpg" alt="Podcast cover">
+<div class="current">
+<div class="special">
+<strong>Special International Women’s Da...</strong>
+<span>Service95 Book Club With Dua Lipa</span>
+</div>
+<button class="utility-button add" aria-label="Add to your episodes"><img class="icon icon-light" src="./Icons/add.svg" alt=""></button>
+</div>
+<div class="comment">Comments <span style="float:right;
+color:#aaa">Show all (6)</span>
+</div>
+</aside>
+</section>
+<footer class="bottom">
+<div class="now-playing">
+<img src="./Albums/podcast-cover.jpg" alt="">
+<div>
+<strong>Special International Wome...</strong>
+<span>Service95 Book Club With Dua Lipa</span>
+</div>
+<button class="utility-button add" aria-label="Add to your episodes"><img class="icon icon-light" src="./Icons/add.svg" alt=""></button>
+</div>
+<div class="player-center">
+<div class="controls">
+<div class="control-group">
+<button class="speed-control" aria-label="Speed 1×"><span class="speed-number">1</span><span class="speed-symbol">×</span></button>
+<button aria-label="Skip back 15 seconds"><img class="icon icon-light" src="./Icons/seek-back-15.svg" alt=""></button>
+<button aria-label="Previous"><img class="icon icon-light" src="./Icons/skip back.svg" alt=""></button>
+</div>
+<button class="play-small" id="footerPlay">▶</button>
+<div class="control-group">
+<button aria-label="Next"><img class="icon icon-light" src="Icons/skip forward.svg" alt=""></button>
+<button aria-label="Skip forward 15 seconds"><img class="icon icon-light" src="./Icons/seek-forward-15.svg" alt=""></button>
+</div>
+</div>
+<div class="seek">
+<span>0:09</span>
+<div class="seek-track">
+<div class="seek-fill">
+</div>
+</div>
+<span>13:55</span>
+</div>
+</div>
+<div class="bottom-right">
+<button class="utility-button" aria-label="Queue"><img class="icon icon-light" src="./Icons/queue.svg" alt=""></button>
+<button class="utility-button" aria-label="Connect to a device"><img class="icon icon-light" src="./Icons/device.svg" alt=""></button>
+<div class="volume-control">
+<button class="utility-button" id="muteButton" aria-label="Mute"><img class="icon icon-light" src="./Icons/volume-high.svg" alt=""></button>
+<label class="visually-hidden" for="volumeRange">Change volume</label>
+<input class="volume-range" id="volumeRange" type="range" min="0" max="100" value="100">
+</div>
+<button class="utility-button" aria-label="Open miniplayer"><img class="icon icon-light" src="./Icons/miniplayer.svg" alt=""></button>
+<button class="utility-button" aria-label="Enter full screen"><img class="icon icon-light" src="./Icons/fullscreen.svg" alt=""></button>
+</div>
+</footer>
+</main>
+<script>const tabs=document.querySelectorAll('.tab'),panes=['description','transcript','chapters'];
+tabs.forEach(tab=>tab.addEventListener('click',()=>{tabs.forEach(t=>t.classList.remove('active'));
+tab.classList.add('active');
+panes.forEach(p=>document.getElementById(p).style.display=p===tab.dataset.pane?'block':'none')}
+));
+function toggle(){const playing=document.getElementById('heroPlay').textContent==='❚❚';
+document.getElementById('heroPlay').textContent=playing?'▶':'❚❚';
+document.getElementById('footerPlay').textContent=playing?'▶':'❚❚'}
+document.getElementById('heroPlay').onclick=toggle;
+document.getElementById('footerPlay').onclick=toggle;
+const volumeRange=document.getElementById('volumeRange');
+const muteButton=document.getElementById('muteButton');
+function paintVolume(){const value=volumeRange.value;volumeRange.style.background=`linear-gradient(to right, #fff 0 ${value}%, #5e5e5e ${value}% 100%)`;}
+volumeRange.addEventListener('input',paintVolume);
+muteButton.addEventListener('click',()=>{volumeRange.value=volumeRange.value==='0'?'100':'0';paintVolume();});
+paintVolume();
+</script>
+</body>
+</html>
